@@ -11,23 +11,17 @@ const menuList = document.querySelector(".js-menu");
 const body = document.querySelector("body");
 const themeChekbox = document.querySelector("#theme-switch-toggle");
 
-const menuItem = createItem(menu);
+const menuItem = template(menu);
 menuList.insertAdjacentHTML("beforeend", menuItem);
-
-body.classList.add(Theme.LIGHT);
 
 themeChekbox.addEventListener("change", themeChange);
 
 keyLocalStorage();
 
-//функция создания разметки меню
-function createItem(evt) {
-  return template(evt);
-}
-
 //функция изменение темы
 function themeChange(evt) {
   body.classList.toggle(Theme.DARK);
+  body.classList.toggle(Theme.LIGHT);
   const check = evt.target.checked;
   localStorage.setItem(CHECKED_CHANGE, check);
 }
@@ -39,5 +33,7 @@ function keyLocalStorage() {
   if (saveKey === "true") {
     body.classList.add(Theme.DARK);
     themeChekbox.checked = true;
+  } else {
+    body.classList.add(Theme.LIGHT);
   }
 }
